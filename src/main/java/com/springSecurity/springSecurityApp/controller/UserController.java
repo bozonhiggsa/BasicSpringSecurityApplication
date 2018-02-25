@@ -4,6 +4,8 @@ import com.springSecurity.springSecurityApp.model.User;
 import com.springSecurity.springSecurityApp.service.SecurityService;
 import com.springSecurity.springSecurityApp.service.UserService;
 import com.springSecurity.springSecurityApp.validator.UserValidator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +32,8 @@ public class UserController {
     @Autowired
     private UserValidator userValidator;
 
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
         model.addAttribute("userForm", new User());
@@ -47,7 +51,11 @@ public class UserController {
 
         userService.save(userForm);
 
+        logger.debug("User successfully saved");
+
         securityService.autoLogin(userForm.getUsername(), userForm.getConfirmPassword());
+
+        logger.debug("AutoLogin is performed");
 
         return "redirect:/welcome";
     }
