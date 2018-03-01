@@ -5,8 +5,8 @@ To understand underlying mechanisms - Registration using DB MySQL, authenticatio
 Technologies:
 - Java 8
 - Spring IoC
-- Spring WebMVC
-- Spring Security
+- Spring WebMVC 4
+- Spring Security 4
 - Tomcat 8
 
 Prerequisites:
